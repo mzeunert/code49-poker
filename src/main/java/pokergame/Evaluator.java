@@ -29,16 +29,43 @@ public class Evaluator {
       }
       prev = current;
     }
+    //calculate secondary scores
+    List<Integer> secondaryScores = hand.stream().map((c)->c.value().ordinal()).collect(Collectors.toList());
+    List<Integer> pairValues = pairs.stream().map((p)->p.get(0).value().ordinal()).toList();
+    List<Integer> threeValues = threes.stream().map((p)->p.get(0).value().ordinal()).toList();
+    List<Integer> fourValues = fours.stream().map((p)->p.get(0).value().ordinal()).toList();
     //now use early return to return highest handvalue
-    if(isStraight && isFlush) return new HandScore(HandValue.STRAIGHT_FLUSH,List.of(0));
-    if(fours.size()>0) return new HandScore(HandValue.FOUR_OF_A_KIND, List.of(0));
-    if(threes.size()>0 && pairs.size()>0) return new HandScore(HandValue.FULL_HOUSE, List.of(0));
-    if(isFlush) return new HandScore(HandValue.FLUSH, List.of(0));
-    if(isStraight) return new HandScore(HandValue.STRAIGHT, List.of(0));
-    if(threes.size()>0) return new HandScore(HandValue.THREE_OF_A_KIND, List.of(0));
-    if(pairs.size()>1) return new HandScore(HandValue.TWO_PAIRS, List.of(0));
-    if(pairs.size()>0) return new HandScore(HandValue.PAIR, List.of(0));
-    return new HandScore(HandValue.HIGH_CARD, hand.stream().map((c)->c.value().ordinal()).toList());
+    if(isStraight && isFlush) {
+      return new HandScore(HandValue.STRAIGHT_FLUSH,secondaryScores);
+    }
+    if(fours.size()>0) {
+      secondaryScores.addAll(0, fourValues);
+      return new HandScore(HandValue.FOUR_OF_A_KIND, secondaryScores);
+    }
+    if(threes.size()>0 && pairs.size()>0){
+      secondaryScores.addAll(0, pairValues);
+      secondaryScores.addAll(0, threeValues);
+      return new HandScore(HandValue.FULL_HOUSE, secondaryScores);
+    }
+    if(isFlush){
+      return new HandScore(HandValue.FLUSH, secondaryScores);
+    }
+    if(isStraight){
+      return new HandScore(HandValue.STRAIGHT, secondaryScores);
+    }
+    if(threes.size()>0){
+      secondaryScores.addAll(0, threeValues);
+      return new HandScore(HandValue.THREE_OF_A_KIND, List.of(0));
+    }
+    if(pairs.size()>1){
+      secondaryScores.addAll(0, pairValues);
+      return new HandScore(HandValue.TWO_PAIRS, secondaryScores);
+    }
+    if(pairs.size()>0){
+      secondaryScores.addAll(0, pairValues);
+      return new HandScore(HandValue.PAIR, secondaryScores);
+    }
+    return new HandScore(HandValue.HIGH_CARD, secondaryScores);
   }
 
 
