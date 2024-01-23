@@ -28,8 +28,15 @@ public class Evaluator {
       }
       prev = current;
     }
-
+    //now use early return to return highest handvalue
     if(isStraight && isFlush) return HandValue.STRAIGHT_FLUSH;
+    if(fours.size()>0) return HandValue.FOUR_OF_A_KIND;
+    if(threes.size()>0 && pairs.size()>0) return HandValue.FULL_HOUSE;
+    if(isFlush) return HandValue.FLUSH;
+    if(isStraight) return HandValue.STRAIGHT;
+    if(threes.size()>0) return HandValue.THREE_OF_A_KIND;
+    if(pairs.size()>1) return HandValue.TWO_PAIRS;
+    if(pairs.size()>0) return HandValue.PAIR;
     return HandValue.HIGH_CARD;
 
   }

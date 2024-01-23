@@ -17,7 +17,7 @@ public class EvaluatorTest {
 
   @Test
   public void testHighCardHand() {
-    var hand = HandGenerator.generateRandomHand();
+    var hand = List.of(new Card(C,FIVE),new Card(D,SEVEN),new Card(C,TWO),new Card(C,THREE),new Card(C,FOUR));
     assertEquals(HandValue.HIGH_CARD,Evaluator.evaluateHand(hand));
   }
 
