@@ -51,6 +51,16 @@ public class Evaluator {
   public static int evaluateGame(List<List<Card>> hands){
     assert (hands.size()>0);
 
-    return 0;
+    int winner = 0;
+    var winnerScore = new HandScore(evaluateHand(hands.get(0)), 0);
+
+    for(int playerIdx = 1;playerIdx<hands.size();playerIdx++){
+      var playerScore = new HandScore(evaluateHand(hands.get(playerIdx)), 0);
+      if(playerScore.compareTo(winnerScore)>0){
+        winner = playerIdx;
+        winnerScore = playerScore;
+      }
+    }
+    return winner;
   }
 }
