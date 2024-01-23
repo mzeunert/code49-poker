@@ -6,7 +6,8 @@ import java.util.stream.Collectors;
 
 public class Evaluator {
   public static HandScore evaluateHand(List<Card> handIn) {
-    assert (handIn.size() == 5);
+    if (handIn.size() != 5) throw new RuntimeException("handsize must be 5 cards");
+
     var hand = new ArrayList<>(handIn);
     //ordering hand by value high ot low
     hand.sort((a, b) -> b.value().compareTo(a.value()));
@@ -69,7 +70,7 @@ public class Evaluator {
 
 
   public static int evaluateGame(List<List<Card>> hands) {
-    assert (hands.size() > 0);
+    if (hands.size()<1) throw new RuntimeException("At least 2 hands are required for a valid game");
 
     int winner = 0;
     var winnerScore = evaluateHand(hands.get(0));
