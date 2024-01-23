@@ -1,6 +1,7 @@
 package pokergame;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,5 +40,17 @@ public class Evaluator {
     if(pairs.size()>0) return HandValue.PAIR;
     return HandValue.HIGH_CARD;
 
+  }
+  record HandScore(HandValue handvalue, int secondaryScore) implements  Comparable<HandScore>{
+
+    @Override
+    public int compareTo(HandScore o) {
+      return Comparator.comparing(HandScore::handvalue).thenComparing(HandScore::secondaryScore).compare(this,o);
+    }
+  }
+  public static int evaluateGame(List<List<Card>> hands){
+    assert (hands.size()>0);
+
+    return 0;
   }
 }
