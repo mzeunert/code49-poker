@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Evaluator {
-  public static HandValue evaluateHand(List<Card> handIn){
+  public static HandScore evaluateHand(List<Card> handIn){
     assert(handIn.size()==5);
     var hand = new ArrayList<>(handIn);
     //ordering hand by value high ot low
@@ -30,32 +30,26 @@ public class Evaluator {
       prev = current;
     }
     //now use early return to return highest handvalue
-    if(isStraight && isFlush) return HandValue.STRAIGHT_FLUSH;
-    if(fours.size()>0) return HandValue.FOUR_OF_A_KIND;
-    if(threes.size()>0 && pairs.size()>0) return HandValue.FULL_HOUSE;
-    if(isFlush) return HandValue.FLUSH;
-    if(isStraight) return HandValue.STRAIGHT;
-    if(threes.size()>0) return HandValue.THREE_OF_A_KIND;
-    if(pairs.size()>1) return HandValue.TWO_PAIRS;
-    if(pairs.size()>0) return HandValue.PAIR;
-    return HandValue.HIGH_CARD;
-
+    if(isStraight && isFlush) return new HandScore(HandValue.STRAIGHT_FLUSH,List.of(0));
+    if(fours.size()>0) return new HandScore(HandValue.FOUR_OF_A_KIND, List.of(0));
+    if(threes.size()>0 && pairs.size()>0) return new HandScore(HandValue.FULL_HOUSE, List.of(0));
+    if(isFlush) return new HandScore(HandValue.FLUSH, List.of(0));
+    if(isStraight) return new HandScore(HandValue.STRAIGHT, List.of(0));
+    if(threes.size()>0) return new HandScore(HandValue.THREE_OF_A_KIND, List.of(0));
+    if(pairs.size()>1) return new HandScore(HandValue.TWO_PAIRS, List.of(0));
+    if(pairs.size()>0) return new HandScore(HandValue.PAIR, List.of(0));
+    return new HandScore(HandValue.HIGH_CARD, hand.stream().map((c)->c.value().ordinal()).toList());
   }
-  record HandScore(HandValue handvalue, int secondaryScore) implements  Comparable<HandScore>{
 
-    @Override
-    public int compareTo(HandScore o) {
-      return Comparator.comparing(HandScore::handvalue).thenComparing(HandScore::secondaryScore).compare(this,o);
-    }
-  }
+
   public static int evaluateGame(List<List<Card>> hands){
     assert (hands.size()>0);
 
     int winner = 0;
-    var winnerScore = new HandScore(evaluateHand(hands.get(0)), 0);
+    var winnerScore = evaluateHand(hands.get(0));
 
     for(int playerIdx = 1;playerIdx<hands.size();playerIdx++){
-      var playerScore = new HandScore(evaluateHand(hands.get(playerIdx)), 0);
+      var playerScore = evaluateHand(hands.get(playerIdx));
       if(playerScore.compareTo(winnerScore)>0){
         winner = playerIdx;
         winnerScore = playerScore;

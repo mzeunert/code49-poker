@@ -26,48 +26,48 @@ public class EvaluatorTest {
 
   @Test
   public void testHighCardHand() {
-    assertEquals(HandValue.HIGH_CARD,Evaluator.evaluateHand(HIGH_CARD));
+    assertEquals(HandValue.HIGH_CARD,Evaluator.evaluateHand(HIGH_CARD).handvalue());
   }
 
   @Test
   public void testPairHand() {
-    assertEquals(HandValue.PAIR, Evaluator.evaluateHand(PAIR));
+    assertEquals(HandValue.PAIR, Evaluator.evaluateHand(PAIR).handvalue());
   }
 
   @Test
   public void testTwoPairs() {
-    assertEquals( HandValue.TWO_PAIRS,Evaluator.evaluateHand(TWO_PAIRS));
+    assertEquals( HandValue.TWO_PAIRS,Evaluator.evaluateHand(TWO_PAIRS).handvalue());
   }
 
   @Test
   public void testThreeOfAKindHand() {
-    assertEquals(HandValue.THREE_OF_A_KIND, Evaluator.evaluateHand(THREE_OF_A_KIND));
+    assertEquals(HandValue.THREE_OF_A_KIND, Evaluator.evaluateHand(THREE_OF_A_KIND).handvalue());
   }
 
   @Test
   public void testStraightHand() {
-    assertEquals(HandValue.STRAIGHT, Evaluator.evaluateHand(STRAIGHT));
+    assertEquals(HandValue.STRAIGHT, Evaluator.evaluateHand(STRAIGHT).handvalue());
   }
 
   @Test
   public void testFlushHand() {
-    assertEquals(HandValue.FLUSH, Evaluator.evaluateHand(FLUSH));
+    assertEquals(HandValue.FLUSH, Evaluator.evaluateHand(FLUSH).handvalue());
   }
 
 
   @Test
   public void testFullHouseHand() {
-    assertEquals(HandValue.FULL_HOUSE, Evaluator.evaluateHand(FULL_HOUSE));
+    assertEquals(HandValue.FULL_HOUSE, Evaluator.evaluateHand(FULL_HOUSE).handvalue());
   }
 
   @Test
   public void testFourOfAKindHand() {
-    assertEquals(HandValue.FOUR_OF_A_KIND, Evaluator.evaluateHand(FOUR_OF_A_KIND));
+    assertEquals(HandValue.FOUR_OF_A_KIND, Evaluator.evaluateHand(FOUR_OF_A_KIND).handvalue());
   }
 
   @Test
   public void testStraightFlushHand() {
-    assertEquals(HandValue.STRAIGHT_FLUSH, Evaluator.evaluateHand(STRAIGHT_FLUSH));
+    assertEquals(HandValue.STRAIGHT_FLUSH, Evaluator.evaluateHand(STRAIGHT_FLUSH).handvalue());
   }
 
   @Test
