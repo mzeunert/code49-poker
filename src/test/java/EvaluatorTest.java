@@ -25,7 +25,7 @@ public class EvaluatorTest {
   public static final List<Card> STRAIGHT = List.of(new Card(C, TWO), new Card(D, THREE), new Card(H, FOUR), new Card(C, FIVE), new Card(C, SIX));
   public static final List<Card> THREE_OF_A_KIND = List.of(new Card(C, FIVE), new Card(D, FIVE), new Card(H, FIVE), new Card(C, THREE), new Card(C, FOUR));
   public static final List<Card> TWO_PAIRS = List.of(new Card(C, FIVE), new Card(D, FIVE), new Card(C, SEVEN), new Card(D, SEVEN), new Card(C, FOUR));
-  public static final List<Card> TWO_PAIRS_BETTER = List.of(new Card(S, THREE), new Card(H, THREE), new Card(C, TEN), new Card(D, TEN), new Card(C, FOUR));
+  public static final List<Card> TWO_PAIRS_BETTER = List.of(new Card(S, THREE), new Card(H, THREE), new Card(C, TEN), new Card(D, TEN), new Card(S, FOUR));
 
   public static final List<Card> PAIR = List.of(new Card(C, FIVE), new Card(D, FIVE), new Card(C, TWO), new Card(C, THREE), new Card(C, FOUR));
   public static final List<Card> PAIR_SIX = List.of(new Card(C, SIX), new Card(D, SIX), new Card(C, TWO), new Card(C, THREE), new Card(C, FOUR));
