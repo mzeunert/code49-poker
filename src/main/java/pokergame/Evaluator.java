@@ -1,6 +1,7 @@
 package pokergame;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,8 @@ public class Evaluator {
     }
     //calculate secondary scores
     List<Integer> secondaryScores = hand.stream().map((c) -> c.value().ordinal()).collect(Collectors.toList());
-    List<Integer> pairValues = pairs.stream().map((p) -> p.get(0).value().ordinal()).toList();
+    List<Integer> pairValues = pairs.stream().map((p) -> p.get(0).value().ordinal()).sorted(Comparator.reverseOrder()).toList();
+
     List<Integer> threeValues = threes.stream().map((p) -> p.get(0).value().ordinal()).toList();
     List<Integer> fourValues = fours.stream().map((p) -> p.get(0).value().ordinal()).toList();
     //now use early return to return highest handvalue

@@ -24,8 +24,8 @@ public class EvaluatorTest {
   public static final List<Card> FLUSH = List.of(new Card(C, TWO), new Card(C, THREE), new Card(C, NINE), new Card(C, FIVE), new Card(C, SIX));
   public static final List<Card> STRAIGHT = List.of(new Card(C, TWO), new Card(D, THREE), new Card(H, FOUR), new Card(C, FIVE), new Card(C, SIX));
   public static final List<Card> THREE_OF_A_KIND = List.of(new Card(C, FIVE), new Card(D, FIVE), new Card(H, FIVE), new Card(C, THREE), new Card(C, FOUR));
-  public static final List<Card> TWO_PAIRS = List.of(new Card(C, FIVE), new Card(D, FIVE), new Card(C, TWO), new Card(D, TWO), new Card(C, FOUR));
-  public static final List<Card> TWO_PAIRS_BETTER = List.of(new Card(S, FIVE), new Card(H, FIVE), new Card(C, THREE), new Card(D, THREE), new Card(C, FOUR));
+  public static final List<Card> TWO_PAIRS = List.of(new Card(C, FIVE), new Card(D, FIVE), new Card(C, SEVEN), new Card(D, SEVEN), new Card(C, FOUR));
+  public static final List<Card> TWO_PAIRS_BETTER = List.of(new Card(S, THREE), new Card(H, THREE), new Card(C, TEN), new Card(D, TEN), new Card(C, FOUR));
 
   public static final List<Card> PAIR = List.of(new Card(C, FIVE), new Card(D, FIVE), new Card(C, TWO), new Card(C, THREE), new Card(C, FOUR));
   public static final List<Card> PAIR_SIX = List.of(new Card(C, SIX), new Card(D, SIX), new Card(C, TWO), new Card(C, THREE), new Card(C, FOUR));
@@ -92,8 +92,8 @@ public class EvaluatorTest {
 
   @Test
   public void testBothHighCardGame() {
-    var playerOneHand = HIGH_CARD;
-    var playerTwoHand = HIGH_CARD_ACE;
+    var playerOneHand = TWO_PAIRS;
+    var playerTwoHand = TWO_PAIRS_BETTER;
     var winner = Evaluator.evaluateGame(List.of(playerOneHand, playerTwoHand));
     assertEquals(1, winner);
   }
@@ -103,7 +103,7 @@ public class EvaluatorTest {
   @MethodSource("providePairsOfHands")
   void testPairsOfHands(List<List<Card>> hands, int expectedWinner) {
     var winner = Evaluator.evaluateGame(hands);
-    assertEquals(1, winner);
+    assertEquals(expectedWinner, winner);
   }
 
   private static Stream<Arguments> providePairsOfHands() {
